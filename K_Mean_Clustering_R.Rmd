@@ -1,0 +1,99 @@
+---
+title: "K Mean Clutering"
+output:
+  html_document:
+    df_print: paged
+    theme: spacelab
+    highlight: pygments
+    number_sections: yes
+    toc: true
+    toc_depth: 3
+    toc_float: true
+  html_notebook: default
+  pdf_document: 
+    highlight: pygments
+    number_sections: yes
+author: 
+  - Minxing Si
+date: "`r format(Sys.time(), '%B %d  %Y')`"
+---
+
+# Introduction
+
+In situ oil sands clustering test 
+
+data 2015 - 2019. 
+
+
+
+Explain box plot 
+
+https://www.r-graph-gallery.com/boxplot.html
+
+
+
+Evaluate Sensor data. 
+
+```{r, message=FALSE}
+library(tidyverse)
+library(DataExplorer)
+library(lubridate)
+library(pander)
+library(data.table)
+library(grid)
+library(gridExtra)
+library(ggpubr)
+library(viridis)
+library(readxl)
+```
+
+
+```{r "setup", include=FALSE}
+library(knitr)
+# Mac 
+# setwd("~/OneDrive/PEMS/NN_Train/DataPreparation")
+# knitr::opts_knit$set(root.dir = "~/OneDrive/PEMS/NN_Train/DataPreparation")
+
+# Windows use below
+#setwd("C:/Users/minxi/OneDrive - KeeWee Solutions Inc/AlbertaAirShed/Evaluation_Sensor")
+
+#knitr::opts_knit$set(root.dir = "C:/Users/minxi/OneDrive - KeeWee Solutions Inc/AlbertaAirShed/Evaluation_Sensor")
+
+```
+
+# Load Data
+
+
+```{r message=FALSE}
+df <- read_csv("facility_2015_2019_v2.csv")
+
+head(df)
+
+
+```
+
+
+```{r}
+names(df)
+```
+
+
+```{r}
+df_clustering <- df %>% select(Oil,SteamINJ,SolutionGas,Method,Region)
+head(df_clustering)
+```
+
+```{r}
+sum(is.na(df_clustering))
+```
+
+```{r}
+cluster_feature <- df_clustering[,1:3]
+head(cluster_feature)
+```
+
+```{r}
+df_Plot$Measurement <- as.factor(df_Plot$Measurement)
+```
+
+
